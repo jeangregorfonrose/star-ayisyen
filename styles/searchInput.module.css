@@ -1,0 +1,60 @@
+/****** SEARCH INPUT DESIGN ***********/
+
+#searchContainer{
+    height: 50px;
+    z-index: 1;
+}
+
+#searchInput{
+    width: 400px;
+    height: 50px;
+    border-radius: 10px 10px 10px 10px;
+    outline: white;
+    border: none;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+#searchResults{
+    width: 400px;
+    min-height: 50px;
+    border: 1px solid grey;
+    border-radius: 0px 0px 10px 10px;
+    padding: 0;
+    list-style-type: none;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.3);
+}
+
+#searchResults li{
+    width: 400px;
+    height: 50px;
+    border-bottom: 1px solid grey;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+}
+
+#searchResults li:hover{
+    background-color: rgb(219, 219, 219);
+}
+
+#searchResults li .profilePic{
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+}
+
+#searchResults li .resultDesc{
+    padding-left: 10px;
+}
+
+#searchResults li .resultDesc .resultName{
+    margin-bottom: 2px;
+}
+
+#searchResults li .resultDesc .resultTitle{
+    font-size: 10px;
+}
