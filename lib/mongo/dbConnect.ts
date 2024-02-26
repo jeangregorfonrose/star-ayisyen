@@ -12,10 +12,16 @@ async function connectDb() {
     console.log("Using existing connection");
     return;
   }
+
   // Use new database connection
-  const db = await mongoose.connect(MONGODB_URI!);
-  console.log("DB Connected");
-  connection.isConnected = db.connections[0].readyState;
+  if(MONGODB_URI) {
+    const db = await mongoose.connect(MONGODB_URI);
+
+    console.log(db);
+
+  }
+  // console.log("DB Connected");
+  // connection.isConnected = db.connections[0].readyState;
 }
 
 export default connectDb;

@@ -18,6 +18,6 @@ const testSchema = new Schema({
   profileimg: String
 });
 
-const Test = models.Test || model("Test", testSchema);
+const Test = models.Test || model("test", testSchema);
 
 export default Test;
