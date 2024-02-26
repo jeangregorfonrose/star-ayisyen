@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-const testSchema = new Schema({
+const starSchema = new Schema({
   fname: String,
   lname: String,
   popularnname: String,
@@ -18,6 +18,6 @@ const testSchema = new Schema({
   profileimg: String
 });
 
-const Test = models.Test || model("test", testSchema);
+const Star = models.Test || model("Star", starSchema);
 
-export default Test;
+export default Star;
