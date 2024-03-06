@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import connectDb from "@/lib/mongo/dbConnect";
-import Star from "@/lib/mongo/testModel";
+import MStar from "@/lib/mongo/models/star";
 
 connectDb();
 
@@ -8,7 +8,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const test = await Star.create(req.body);
+  console.log(req.body);
+  const test = await MStar.create(req.body);
 
   if (test.err) {
     console.log(test.err.message);

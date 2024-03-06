@@ -11,7 +11,7 @@ export type socialApp = "Instagram" | "Facebook" | "Tiktok" | "LinkedIn" | "Snap
  * The type for a user's social profile information.
  */
 export type social = {
-    app: socialApp,
+    app: string,
     link: string,
 };
 
@@ -19,6 +19,6 @@ export type social = {
  * Awards that a star may have nominated for
  */
 export type awards = {
-  date: Date;
   title: string;
+  date: Date;
 };

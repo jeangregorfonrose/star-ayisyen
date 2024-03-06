@@ -1,7 +1,6 @@
 /**
  * This files contains all the interfaces used  by the application.
  */
-
 import { awards, social } from "./types";
 
 /**
@@ -10,18 +9,20 @@ import { awards, social } from "./types";
 export interface IStar {
   fname: string;
   lname: string;
-  starname: string;
-  othernames: [string];
-  ocupations: [string];
-  birthdate: Date;
-  birthplace: {
+  starName: string;
+  otherNames: [string];
+  occupations: [string];
+  birthDate: Date;
+  birthPlace: {
     country: string;
     department: string;
     city: string;
   };
-  deathdate?: Date;
-  imageurl?: string;
+  deathDate?: Date;
+  imageUrl?: string;
   bio: string;
   awards: [awards];
   socials: [social];
+  createdDate: Date;
+  updatedDate: Date;
 }
