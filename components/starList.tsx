@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from "react";
+import { useState } from "react";
 import styles from "../styles/starList.module.css";
 import router from "next/router";
 
