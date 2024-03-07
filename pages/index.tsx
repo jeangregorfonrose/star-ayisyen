@@ -1,4 +1,6 @@
+import Banner from "@/components/banner";
 import Layout from "@/components/layout";
+import StarList from "@/components/starList";
 import Head from "next/head";
 
 export default function Home() {
@@ -7,7 +9,12 @@ export default function Home() {
       <Head>
         <title>Star Ayisyen</title>
       </Head>
-      <Layout></Layout>
+      <Layout>
+        <Banner />
+        <div className="main-container">
+          <StarList />
+        </div>
+      </Layout>
     </>
   );
 }
