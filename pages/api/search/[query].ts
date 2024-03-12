@@ -1,19 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import connectDb from "@/lib/mongo/dbConnect";
 import MStar from "@/lib/mongo/models/star";
-import { IStar } from "@/utils/interfaces";
+import { IResponse } from "@/utils/interfaces";
 
 connectDb();
 
-interface Data {
-  success: boolean;
-  data?: IStar[];
-  msg?: string;
-}
-
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<IResponse>
 ) {
 
     // Get the query nad method of the request
@@ -23,10 +17,12 @@ export default async function handler(
     if (method === "GET") { 
       try {
         // clean the query passed
-        const term = String(query).toLowerCase().trim();
+        const term = String(query.query).toLowerCase().trim();
 
         // Find the stars that matched the term passed
-        const stars = await MStar.find().where("starName").regex(term);
+        const stars = await MStar.find({
+          starName: { $regex: `^${term}`},
+        });
 
         // construct response  to send back to client
         const response = {
