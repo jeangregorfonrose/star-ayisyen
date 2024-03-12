@@ -6,6 +6,6 @@ const adminSchema = new Schema<IUser>({
     password: {type: String, required: true}
 });
 
-const MAdmin = models.Star || model<IUser>("Star", adminSchema);
+const MAdmin = models.Star || model<IUser>("Admin", adminSchema);
 
 export default MAdmin;
