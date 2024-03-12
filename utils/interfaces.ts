@@ -26,3 +26,12 @@ export interface IStar {
   createdDate: Date;
   updatedDate: Date;
 }
+
+/**
+ * Defines the structure of the  response when getting stars data from the API.
+ */
+export interface IResponse {
+  success: boolean;
+  data?: IStar[];
+  msg?: string;
+}

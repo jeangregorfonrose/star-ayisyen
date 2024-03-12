@@ -1,71 +1,64 @@
-import { ChangeEvent, useState } from 'react';
-import styles from '../styles/searchInput.module.css';
-
-// to be deleted
-type result = {
-  name: string,
-  titles: string[],
-  profileImg: string
-};
-
-const searchResults: result[] = [
-  {
-    name: "John Doe",
-    titles: ["Actor", "Artist", "Entrepreneur"],
-    profileImg: "../../public/mikaben.jpg",
-  },
-];
+import { ChangeEvent, useEffect, useState } from "react";
+import styles from "../styles/searchInput.module.css";
+import { IStar } from "@/utils/interfaces";
 
 export default function SearchInput() {
-    const [searchTerm, setSearchTerm] = useState<string>("");
-    const [results, setResults] = useState<result[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [results, setResults] = useState<IStar[]>([]);
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-      e.preventDefault();
+  useEffect(() => {
+    // If search term  is empty, don't fetch
+    if (searchTerm === "") return;
 
-      // TODO: to delete
-      console.log(e.target.value);
+    fetch(`/api/search/${searchTerm}`)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        setResults(response.data);
+      });
+  }, [searchTerm]);
 
-      setSearchTerm(e.target.value);
-      e.target.value == "" ? setResults([]) : setResults(searchResults);
-    };
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setSearchTerm(e.target.value);
+  };
 
-    // TODO: Fix input radius issue
-    return (
-      <div id={styles.searchContainer}>
-        <input
-          id={styles.searchInput}
-          type="text"
-          placeholder="Antre non moun nan wap chehce a"
-          value={searchTerm}
-          onChange={(e) => handleInputChange(e)}
-        />
+  // TODO: Fix input radius issue
+  return (
+    <div id={styles.searchContainer}>
+      <input
+        id={styles.searchInput}
+        type="text"
+        placeholder="Antre non star wap chehce a"
+        value={searchTerm}
+        onChange={(e) => handleInputChange(e)}
+      />
 
-        {results.length != 0 && (
-          <ul id={styles.searchResults}>
-            {results.map((result: result) => {
-              // Get info from result
-              const name = result.name;
-              const titles = result.titles;
-              const image = result.profileImg;
+      {results.length != 0 && (
+        <ul id={styles.searchResults}>
+          {results.map((star: IStar) => {
+            // Get info from result
+            const starName = star.starName;
+            const occupations = star.occupations;
+            const image = star.imageUrl;
 
-              return (
-                <li key={name}>
-                  <div
-                    className={styles.profilePic}
-                    style={{ backgroundImage: `url('${image}')` }}
-                  ></div>
-                  <div className={styles.resultDesc}>
-                    <p className={styles.resultName}>{name}</p>
-                    <p className={styles.resultTitle}>
-                      {titles.toString().replaceAll(",", " - ")}
-                    </p>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div>
-    );
+            return (
+              <li key={star.starName}>
+                <div
+                  className={styles.profilePic}
+                  style={{ backgroundImage: `url('${image}')` }}
+                ></div>
+                <div className={styles.resultDesc}>
+                  <p className={styles.resultName}>{starName}</p>
+                  <p className={styles.resultTitle}>
+                    {occupations.toString().replaceAll(",", " - ")}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
 }
