@@ -4,6 +4,14 @@
 import { awards, social } from "./types";
 
 /**
+ * Defines the properties for an admin user
+ */
+export interface IUser {
+  username: string;
+  password: string;
+}
+
+/**
  * Defines the properties of a star in the system.
  */
 export interface IStar {
