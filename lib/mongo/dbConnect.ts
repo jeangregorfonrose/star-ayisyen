@@ -16,8 +16,13 @@ async function connectDb() {
   // Use new database connection
   if(MONGODB_URI) {
     const db = await mongoose.connect(MONGODB_URI);
-    console.log("DB Connected");
+
+    // Auto create collections for models
+    mongoose.set('autoCreate', true);
+    
     connection.isConnected = db.connections[0].readyState;
+
+    console.log("DB connected");
   }
 }
 
