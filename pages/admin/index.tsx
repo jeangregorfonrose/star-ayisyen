@@ -38,8 +38,7 @@ function AuthenticateAdmin() {
   };
 
   return (
-    <>
-      <div className={styles.container}>
+    <div className={styles.container}>
         <h1>Login</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
           {error && <p style={{ color: "red" }}>{error}</p>}
@@ -64,7 +63,6 @@ function AuthenticateAdmin() {
           />
         </form>
       </div>
-    </>
   );
 }
 
