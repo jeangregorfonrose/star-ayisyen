@@ -1,3 +1,14 @@
+import Layout from "@/components/layout";
+import Head from "next/head";
+
 export default function AdminPage() {
-  return <h1>Welcome to the admin page</h1>;
+  return (
+    <>
+      <Head>
+        <title>Star Ayisyen</title>
+      </Head>
+      <Layout>
+      </Layout>
+    </>
+  );
 }
