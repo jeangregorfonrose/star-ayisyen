@@ -8,6 +8,6 @@ const adminSchema = new Schema<IUser>({
     autoCreate: true
 });
 
-const MAdmin = models.Star || model<IUser>("admin", adminSchema);
+const MAdmin = models.Admin || model<IUser>("Admin", adminSchema);
 
 export default MAdmin;
