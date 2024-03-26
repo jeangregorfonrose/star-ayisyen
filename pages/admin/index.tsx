@@ -1,15 +1,21 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import styles from "../../styles/admin.module.css";
 import { useRouter } from "next/router";
 
 function AuthenticateAdmin() {
+  const { status } = useSession();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+
+  // Check if user is already signed in
+  if (status === "authenticated") {
+    router.replace("/admin/dashboard"); // Redirect to dashboard
+  }
 
   // Handle the login action of the login form
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
