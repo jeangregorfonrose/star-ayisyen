@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import styles from "../styles/NavBar.module.css";
+import styles from "@/styles/NavBar.module.css";
 import { signOut } from "next-auth/react";
 
 export default function NavBar() {
