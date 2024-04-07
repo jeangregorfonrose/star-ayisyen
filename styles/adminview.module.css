@@ -1,0 +1,121 @@
+#adminSection {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.head{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#search{
+    width: 500px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#separator{
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#listContainer{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.star{
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.info{
+    cursor: pointer;
+}
+
+.info, .actions{
+    display: flex;
+    align-items: center;
+}
+
+.pic{
+    width: 40px;
+    height: 40px;
+    background-color: black;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.icon{
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#newArtistContainer{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
+/** Design for the form to add new artist **/
+#form{
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#input{
+    width: 90%;
+    height: 40px;
+    padding-left: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#buttonsActions{
+    display: flex;
+    margin-top: 10px;
+}
+
+#addButton{
+    background-color: #55d38b;
+    color: white;
+    border: none;
+}
+
+#deleteButton{
+    background-color: #d35555;
+    color: white;
+    border: none;
+    margin-left: 20px;
+}
