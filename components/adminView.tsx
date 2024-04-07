@@ -1,14 +1,25 @@
 import { Plus, SquarePen, Trash2 } from "lucide-react";
 import styles from "@/styles/adminview.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { IStar } from "@/utils/interfaces";
+import Image from "next/image";
 
 interface Iprops {
   cancelHandler: Function;
   addHandler: Function;
 }
 
-function AddArtistForm(props: Iprops) {
+function AddStarForm(props: Iprops) {
   const [name, setName] = useState("");
+
+  // const addStar = async () => {
+  //   try {
+  //     let res = await fetch("")
+      
+  //   } catch (error) {
+      
+  //   }
+  // };
 
   return (
     <div id={styles.newArtistContainer}>
@@ -43,7 +54,30 @@ function AddArtistForm(props: Iprops) {
 }
 
 export default function AdminView() {
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState<boolean>(false);
+  const [stars, setStars] = useState<IStar[]>([]);
+
+  const getStars = async () => {
+    try {
+      let res = await fetch("/api/stars");
+
+      if (!res.ok) throw new Error("Could not get artists.");
+
+      let resJson = await res.json();
+
+      setStars(resJson.data);
+
+    } catch (err) {
+
+      console.log(err);
+
+    }
+  };
+
+  // Get artists from database
+  useEffect(() => {
+    getStars();
+  }, []);
 
   const hideForm = () => {
     setShowForm(false);
@@ -76,66 +110,28 @@ export default function AdminView() {
           <div id={styles.separator}></div>
           <div className="list">
             <ul id={styles.listContainer}>
-              <li className={styles.star}>
-                <div className={styles.info}>
-                  <div className={styles.pic}></div>
-                  <h3>Name</h3>
-                </div>
+              {stars ? stars.map((star: IStar) => {
+                return (
+                  <li key={star.starName} className={styles.star}>
+                    <div className={styles.info}>
+                      <div className={styles.pic}></div>
+                      <h3>{star.starName}</h3>
+                    </div>
 
-                <div className={styles.actions}>
-                  <SquarePen className={styles.icon} color="#55d38b" />
-                  <Trash2 className={styles.icon} color="#d35555" />
-                </div>
-              </li>
-              <li className={styles.star}>
-                <div className={styles.info}>
-                  <div className={styles.pic}></div>
-                  <h3>Name</h3>
-                </div>
-
-                <div className={styles.actions}>
-                  <SquarePen className={styles.icon} color="#55d38b" />
-                  <Trash2 className={styles.icon} color="#d35555" />
-                </div>
-              </li>
-              <li className={styles.star}>
-                <div className={styles.info}>
-                  <div className={styles.pic}></div>
-                  <h3>Name</h3>
-                </div>
-
-                <div className={styles.actions}>
-                  <SquarePen className={styles.icon} color="#55d38b" />
-                  <Trash2 className={styles.icon} color="#d35555" />
-                </div>
-              </li>
-              <li className={styles.star}>
-                <div className={styles.info}>
-                  <div className={styles.pic}></div>
-                  <h3>Name</h3>
-                </div>
-
-                <div className={styles.actions}>
-                  <SquarePen className={styles.icon} color="#55d38b" />
-                  <Trash2 className={styles.icon} color="#d35555" />
-                </div>
-              </li>
-              <li className={styles.star}>
-                <div className={styles.info}>
-                  <div className={styles.pic}></div>
-                  <h3>Name</h3>
-                </div>
-
-                <div className={styles.actions}>
-                  <SquarePen className={styles.icon} color="#55d38b" />
-                  <Trash2 className={styles.icon} color="#d35555" />
-                </div>
-              </li>
+                    <div className={styles.actions}>
+                      <SquarePen className={styles.icon} color="#55d38b" />
+                      <Trash2 className={styles.icon} color="#d35555" />
+                    </div>
+                  </li>
+                );
+              }) : <div>No stars in the database</div>}
             </ul>
           </div>
         </div>
       </section>
-      {showForm && <AddArtistForm addHandler={addArtist} cancelHandler={hideForm} />}
+      {showForm && (
+        <addStarForm addHandler={addArtist} cancelHandler={hideForm} />
+      )}
     </>
   );
 }
