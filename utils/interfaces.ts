@@ -41,5 +41,5 @@ export interface IStar {
 export interface IResponse {
   success: boolean;
   data?: IStar[];
-  msg?: string;
+  message?: string;
 }
