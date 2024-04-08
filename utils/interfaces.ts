@@ -18,8 +18,8 @@ export interface IStar {
   fname: string;
   lname: string;
   starName: string;
-  otherNames: [string];
-  occupations: [string];
+  otherNames: [string] | [];
+  occupations: [string] | [];
   birthDate: Date;
   birthPlace: {
     country: string;
@@ -29,8 +29,8 @@ export interface IStar {
   deathDate?: Date;
   imageUrl?: string;
   bio: string;
-  awards: [awards];
-  socials: [social];
+  awards: [awards] | [];
+  socials: [social] | [];
   createdDate: Date;
   updatedDate: Date;
 }
