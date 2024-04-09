@@ -12,6 +12,8 @@
     "pre-commit": "npm run lint"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.13.0",
+    "@cloudinary/url-gen": "^1.19.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
