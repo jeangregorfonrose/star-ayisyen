@@ -1,25 +1,66 @@
 import { Plus, SquarePen, Trash2 } from "lucide-react";
 import styles from "@/styles/adminview.module.css";
 import { useEffect, useState } from "react";
-import { IStar } from "@/utils/interfaces";
-import Image from "next/image";
+import { IResponse, IStar } from "@/utils/interfaces";
 
 interface Iprops {
   cancelHandler: Function;
-  addHandler: Function;
 }
 
 function AddStarForm(props: Iprops) {
   const [name, setName] = useState("");
 
-  // const addStar = async () => {
-  //   try {
-  //     let res = await fetch("")
+  const addStar = async () => {
+    try {
+      // Create new star
+      const star: IStar = {
+        fname: "Unknown",
+        lname: "Unknown",
+        starName: name,
+        otherNames: [],
+        occupations: [],
+        birthDate: new Date(0),
+        birthPlace: {
+          country: "Unknown",
+          department: "Unknown",
+          city: "Unknown",
+        },
+        deathDate: new Date(0),
+        imageUrl: "",
+        bio: "Unknown",
+        awards: [],
+        socials: [],
+        createdDate: new Date(0),
+        updatedDate: new Date(0),
+      };
+
+      // Assign starName
+      star.starName = name;
+    
+      let res = await fetch("/api/star", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(star),
+      });
+
+      const response : IResponse = await res.json();
+
+      if (!res.ok) throw new Error(response.message || "HTTP error");
+
+      if(!response.success) throw new Error(response.message)
+
+      // Star was added successfully
+      alert("Star " +  name + " has been added!");
+      setName("")
+      props.cancelHandler()
       
-  //   } catch (error) {
-      
-  //   }
-  // };
+    } catch (error: any) {
+      console.log("Error: ", error);
+    }
+  };
 
   return (
     <div id={styles.newArtistContainer}>
@@ -36,7 +77,7 @@ function AddStarForm(props: Iprops) {
           <button
             id={styles.addButton}
             className="button"
-            onClick={() => props.addHandler(name)}
+            onClick={() => addStar()}
           >
             Add
           </button>
@@ -77,16 +118,10 @@ export default function AdminView() {
   // Get artists from database
   useEffect(() => {
     getStars();
-  }, []);
+  }, [showForm]);
 
   const hideForm = () => {
     setShowForm(false);
-  };
-
-  const addArtist = (name: string) => {
-    alert("Adding  " + name + "...");
-    // TODO: Implement adding an artist to the database
-    hideForm();
   };
 
   return (
@@ -130,7 +165,7 @@ export default function AdminView() {
         </div>
       </section>
       {showForm && (
-        <addStarForm addHandler={addArtist} cancelHandler={hideForm} />
+        <AddStarForm cancelHandler={hideForm} />
       )}
     </>
   );
