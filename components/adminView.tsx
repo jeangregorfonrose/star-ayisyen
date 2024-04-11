@@ -1,4 +1,7 @@
 import { Plus, SquarePen, Trash2 } from "lucide-react";
+import { Cloudinary } from "@cloudinary/url-gen";
+import { AdvancedImage } from "@cloudinary/react";
+import { fill } from "@cloudinary/url-gen/actions/resize";
 import styles from "@/styles/adminview.module.css";
 import { useEffect, useState } from "react";
 import { IResponse, IStar } from "@/utils/interfaces";
@@ -36,7 +39,7 @@ function AddStarForm(props: Iprops) {
 
       // Assign starName
       star.starName = name;
-    
+
       let res = await fetch("/api/star", {
         headers: {
           Accept: "application/json",
@@ -46,17 +49,16 @@ function AddStarForm(props: Iprops) {
         body: JSON.stringify(star),
       });
 
-      const response : IResponse = await res.json();
+      const response: IResponse = await res.json();
 
       if (!res.ok) throw new Error(response.message || "HTTP error");
 
-      if(!response.success) throw new Error(response.message)
+      if (!response.success) throw new Error(response.message);
 
       // Star was added successfully
-      alert("Star " +  name + " has been added!");
-      setName("")
-      props.cancelHandler()
-      
+      alert("Star " + name + " has been added!");
+      setName("");
+      props.cancelHandler();
     } catch (error: any) {
       console.log("Error: ", error);
     }
@@ -98,6 +100,19 @@ export default function AdminView() {
   const [showForm, setShowForm] = useState<boolean>(false);
   const [stars, setStars] = useState<IStar[]>([]);
 
+  // Create a Cloudinary instance and set cloud name.
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: "dwt2v82ez",
+    },
+  });
+
+  // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
+  const myImage = cld.image("star-ayisyen/stars/mikaben");
+
+  // Resize to 250 x 250 pixels using the 'fill' crop mode.
+  myImage.resize(fill().width(40).height(40));
+
   const getStars = async () => {
     try {
       let res = await fetch("/api/stars");
@@ -107,11 +122,8 @@ export default function AdminView() {
       let resJson = await res.json();
 
       setStars(resJson.data);
-
     } catch (err) {
-
       console.log(err);
-
     }
   };
 
@@ -145,28 +157,32 @@ export default function AdminView() {
           <div id={styles.separator}></div>
           <div className="list">
             <ul id={styles.listContainer}>
-              {stars ? stars.map((star: IStar) => {
-                return (
-                  <li key={star.starName} className={styles.star}>
-                    <div className={styles.info}>
-                      <div className={styles.pic}></div>
-                      <h3>{star.starName}</h3>
-                    </div>
+              {stars ? (
+                stars.map((star: IStar) => {
+                  return (
+                    <li key={star.starName} className={styles.star}>
+                      <div className={styles.info}>
+                        <div className={styles.pic}>
+                          <AdvancedImage cldImg={myImage} />
+                        </div>
+                        <h3>{star.starName}</h3>
+                      </div>
 
-                    <div className={styles.actions}>
-                      <SquarePen className={styles.icon} color="#55d38b" />
-                      <Trash2 className={styles.icon} color="#d35555" />
-                    </div>
-                  </li>
-                );
-              }) : <div>No stars in the database</div>}
+                      <div className={styles.actions}>
+                        <SquarePen className={styles.icon} color="#55d38b" />
+                        <Trash2 className={styles.icon} color="#d35555" />
+                      </div>
+                    </li>
+                  );
+                })
+              ) : (
+                <div>No stars in the database</div>
+              )}
             </ul>
           </div>
         </div>
       </section>
-      {showForm && (
-        <AddStarForm cancelHandler={hideForm} />
-      )}
+      {showForm && <AddStarForm cancelHandler={hideForm} />}
     </>
   );
 }
