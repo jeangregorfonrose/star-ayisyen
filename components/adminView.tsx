@@ -113,6 +113,7 @@ export default function AdminView() {
   // Resize to 250 x 250 pixels using the 'fill' crop mode.
   myImage.resize(fill().width(40).height(40));
 
+  // Get all stars from the database
   const getStars = async () => {
     try {
       let res = await fetch("/api/stars");
@@ -127,7 +128,7 @@ export default function AdminView() {
     }
   };
 
-  // Get artists from database
+  // Get stars from database
   useEffect(() => {
     getStars();
   }, [showForm]);
@@ -135,6 +136,11 @@ export default function AdminView() {
   const hideForm = () => {
     setShowForm(false);
   };
+
+  const deleteStar = (_id: any) => {
+    console.log(_id);
+    // throw new Error("Function not implemented.");
+  }
 
   return (
     <>
@@ -170,7 +176,7 @@ export default function AdminView() {
 
                       <div className={styles.actions}>
                         <SquarePen className={styles.icon} color="#55d38b" />
-                        <Trash2 className={styles.icon} color="#d35555" />
+                        <Trash2 className={styles.icon} color="#d35555" onClick={() => deleteStar(star._id)}/>
                       </div>
                     </li>
                   );

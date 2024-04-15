@@ -15,6 +15,7 @@ export interface IUser {
  * Defines the properties of a star in the system.
  */
 export interface IStar {
+  _id?: string;
   fname: string;
   lname: string;
   starName: string;
