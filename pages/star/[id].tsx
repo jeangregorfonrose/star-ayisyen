@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import styles from "../../styles/profile.module.css";
-import NavBar from "@/components/navBar";
 
 export default function Star() {
     const router = useRouter();

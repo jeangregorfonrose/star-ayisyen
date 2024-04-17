@@ -143,7 +143,7 @@ const results: categorySection = {
 };
 
 export default function StarList() {
-  const [section, setSection] = useState(results);
+  const [section] = useState(results);
 
   return (
     <section className={styles.sectionContainer}>
