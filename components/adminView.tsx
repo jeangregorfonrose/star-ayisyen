@@ -137,9 +137,29 @@ export default function AdminView() {
     setShowForm(false);
   };
 
-  const deleteStar = (_id: any) => {
-    console.log(_id);
-    // throw new Error("Function not implemented.");
+  const deleteStar = async (star: IStar) => {
+    // Prompt user to confirm deletion
+    if (window.confirm(`Are you sure you want to remove star ${star.starName}?`)) {
+      try {
+        const param = {id: star._id as string}
+
+        let res = await fetch("/api/star?" + new URLSearchParams(param), {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+        })
+ 
+        const response = await res.json()
+
+        if(!response.success) throw new Error(response.message || "Server error")
+        
+        alert(`Successfully deleted star ${star.starName}!`);
+        setStars(stars.filter((s) => s !== star));
+      } catch (error) {
+        console.log(error)
+        alert("Star not deleted! Error occurred !")
+        
+      }
+    }
   }
 
   return (
@@ -166,7 +186,7 @@ export default function AdminView() {
               {stars ? (
                 stars.map((star: IStar) => {
                   return (
-                    <li key={star.starName} className={styles.star}>
+                    <li key={star._id} className={styles.star}>
                       <div className={styles.info}>
                         <div className={styles.pic}>
                           <AdvancedImage cldImg={myImage} />
@@ -176,7 +196,7 @@ export default function AdminView() {
 
                       <div className={styles.actions}>
                         <SquarePen className={styles.icon} color="#55d38b" />
-                        <Trash2 className={styles.icon} color="#d35555" onClick={() => deleteStar(star._id)}/>
+                        <Trash2 className={styles.icon} color="#d35555" onClick={() => deleteStar(star)}/>
                       </div>
                     </li>
                   );
