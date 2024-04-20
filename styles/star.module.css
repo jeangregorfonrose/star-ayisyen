@@ -1,0 +1,26 @@
+.star {
+  width: 200px;
+  height: 200px;
+  margin-right: 20px;
+  border-radius: 20px;
+  background-image: url("../public/mikaben.jpg");
+  background-size: cover;
+  box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.star .name {
+  width: 80%;
+  height: 40px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  top: 20px;
+}

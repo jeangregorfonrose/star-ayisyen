@@ -1,9 +1,34 @@
 import Banner from "@/components/banner";
 import Layout from "@/components/layout";
 import StarList from "@/components/starList";
+import { IStar } from "@/utils/interfaces";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [stars, setStars] = useState<IStar[]>([]);
+
+  // TODO: Change this request to get multiple stars based on different categorization and trends
+  // Get all stars from the database
+  const getStars = async () => {
+    try {
+      let res = await fetch("/api/stars");
+
+      if (!res.ok) throw new Error("Could not get artists.");
+
+      let resJson = await res.json();
+
+      setStars(resJson.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // Get stars from database
+  useEffect(() => {
+    getStars();
+  }, []);
+
   return (
     <>
       <Head>
@@ -12,7 +37,7 @@ export default function Home() {
       <Layout>
         <Banner />
         <div className="main-container">
-          <StarList />
+          <StarList stars={stars}/>
         </div>
       </Layout>
     </>

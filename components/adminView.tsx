@@ -10,7 +10,7 @@ interface Iprops {
   cancelHandler: Function;
 }
 
-function AddStarForm(props: Iprops) {
+function AddStarForm(props: Readonly<Iprops>) {
   const [name, setName] = useState("");
 
   const addStar = async () => {
@@ -51,7 +51,7 @@ function AddStarForm(props: Iprops) {
 
       const response: IResponse = await res.json();
 
-      if (!res.ok) throw new Error(response.message || "HTTP error");
+      if (!res.ok) throw new Error(response.message ?? "HTTP error");
 
       if (!response.success) throw new Error(response.message);
 
