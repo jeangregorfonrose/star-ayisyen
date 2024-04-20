@@ -43,7 +43,7 @@ export default function SearchInput() {
             const image = star.imageUrl;
 
             return (
-              <li key={star.starName}>
+              <li key={star._id}>
                 <div
                   className={styles.profilePic}
                   style={{ backgroundImage: `url('${image}')` }}
