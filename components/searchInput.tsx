@@ -34,29 +34,33 @@ export default function SearchInput() {
         onChange={(e) => handleInputChange(e)}
       />
 
-      {results.length != 0 && (
+      {searchTerm.length != 0 && (
         <ul id={styles.searchResults}>
-          {results.map((star: IStar) => {
-            // Get info from result
-            const starName = star.starName;
-            const occupations = star.occupations;
-            const image = star.imageUrl;
+          {results.length == 0 ? (
+            <li>No results</li>
+          ) : (
+            results.map((star: IStar) => {
+              // Get info from result
+              const starName = star.starName;
+              const occupations = star.occupations;
+              const image = star.imageUrl;
 
-            return (
-              <li key={star._id}>
-                <div
-                  className={styles.profilePic}
-                  style={{ backgroundImage: `url('${image}')` }}
-                ></div>
-                <div className={styles.resultDesc}>
-                  <p className={styles.resultName}>{starName}</p>
-                  <p className={styles.resultTitle}>
-                    {occupations.toString().replaceAll(",", " - ")}
-                  </p>
-                </div>
-              </li>
-            );
-          })}
+              return (
+                <li key={star._id}>
+                  <div
+                    className={styles.profilePic}
+                    style={{ backgroundImage: `url('${image}')` }}
+                  ></div>
+                  <div className={styles.resultDesc}>
+                    <p className={styles.resultName}>{starName}</p>
+                    <p className={styles.resultTitle}>
+                      {occupations.toString().replaceAll(",", " - ")}
+                    </p>
+                  </div>
+                </li>
+              );
+            })
+          )}
         </ul>
       )}
     </div>
