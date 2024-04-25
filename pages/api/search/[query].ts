@@ -21,7 +21,7 @@ export default async function handler(
 
         // Find the stars that matched the term passed
         const stars = await MStar.find({
-          starName: { $regex: `^${term}`},
+          starName: { $regex: `^${term}`, $options: 'i'},
         });
 
         // construct response  to send back to client
