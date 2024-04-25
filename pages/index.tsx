@@ -37,7 +37,7 @@ export default function Home() {
       <Layout>
         <Banner />
         <div className="main-container">
-          <StarList stars={stars}/>
+          <StarList stars={stars.slice(0, 6)}/>
         </div>
       </Layout>
     </>

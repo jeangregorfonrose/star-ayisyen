@@ -21,11 +21,13 @@
   width: 100%;
   min-height: 240px;
   align-items: center;
+  overflow-x: hidden;
 }
 
 .sectionBody .peopleContainer {
   width: auto;
   height: 200px;
-  display: inline-flex;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
