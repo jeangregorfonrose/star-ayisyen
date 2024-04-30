@@ -9,20 +9,33 @@ export default function Star() {
   const [star, setStar] = useState<IStar>();
   const router = useRouter();
 
-  useEffect(() => {
-    // if ( !localStorage.getItem("token") ) {
-    //     router.push("/login");
-    // };
-  }, []);
+  const getStar = async () => {
+    try {
+      let res = await fetch("/api/star?id=" + router.query.id);
 
-  // return <h1>Id passed was {router.query.starName}</h1>
+      if (!res.ok) throw new Error("Could not get star.");
+
+      let resJson = await res.json();
+
+      console.log(resJson.data);
+
+      setStar(resJson.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getStar();
+  }, [router.isReady]);
+
   return (
     <>
       <Head>
-        <title>Star Ayisyen | {router.query.starName}</title>
+        <title>Star Ayisyen | {router.query.id}</title>
       </Head>
       <Layout>
-        <ProfileSection />
+        {star ? <ProfileSection star={star}/> : <div>Error getting star info</div> }
       </Layout>
     </>
   );
