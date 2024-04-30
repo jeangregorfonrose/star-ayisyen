@@ -10,19 +10,10 @@ export default function Star (props: Readonly<Props>) {
     const star = props.star;
     
     return (
-      <a key={star.starName} className={styles.star} href={`/star/${star._id}`}>
+      <a key={star.starName} className={styles.star} href={`/star/${star.starName}`}>
         <div className={styles.name}>
           <h4>{star.starName}</h4>
         </div>
       </a>
-      //   <div
-      //     key={props.starName}
-      //     className={styles.star}
-      //     // onClick={() => router.push(`/star/${star.id}`)}
-      //   >
-      //     <div className={styles.name}>
-      //       <h4>{props.starName}</h4>
-      //     </div>
-      //   </div>
     );
 }
