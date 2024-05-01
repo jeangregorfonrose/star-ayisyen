@@ -4,6 +4,15 @@
 import { awards, social } from "./types";
 
 /**
+ * Defines the properties for the starAuth object
+ */
+export interface  IStarAuth {
+    starId: string;
+    starName: string;
+    passcode: number;
+}
+
+/**
  * Defines the properties for an admin user
  */
 export interface IUser {
