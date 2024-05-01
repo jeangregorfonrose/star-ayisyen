@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import connectDb from "@/lib/mongo/dbConnect";
 import MStar from "@/lib/mongo/models/star";
 import { IResponse } from "@/utils/interfaces";
+import { generatePasscode } from "@/utils/helpers";
+import MStarAuth from "@/lib/mongo/models/starAuth";
 
 connectDb();
 
@@ -62,6 +64,23 @@ export default async function handler(
         const newStar = await star.save();
 
         if (newStar === star) {
+          // Generate passcode to add starAuth document
+          const genpasscode = generatePasscode();
+
+          // Add passcode to the database
+          const starAuth = new MStarAuth({
+            starId: newStar._id,
+            starName: newStar.starName,
+            passcode: genpasscode,
+          });
+          
+          const newStarAuth = await starAuth.save();
+
+          if(newStarAuth == null || newStarAuth != starAuth){
+            await MStar.deleteOne({_id : newStar._id});
+            throw new Error("Save failed");
+          }
+          
           response.message = `Successfully added ${data.starName}`;
           response.success = true;
           response.data = star;
