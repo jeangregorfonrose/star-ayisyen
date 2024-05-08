@@ -4,6 +4,7 @@ import MStar from "@/lib/mongo/models/star";
 import { IResponse } from "@/utils/interfaces";
 import { generatePasscode } from "@/utils/helpers";
 import MStarAuth from "@/lib/mongo/models/starAuth";
+import bcrypt from "bcrypt";
 
 connectDb();
 
@@ -67,11 +68,14 @@ export default async function handler(
           // Generate passcode to add starAuth document
           const genpasscode = generatePasscode();
 
+          // Hash gen passcode
+          const hashPasscode = await bcrypt.hashSync(genpasscode, 10);
+
           // Add passcode to the database
           const starAuth = new MStarAuth({
             starId: newStar._id,
             starName: newStar.starName,
-            passcode: genpasscode,
+            passcode: hashPasscode,
           });
           
           const newStarAuth = await starAuth.save();
