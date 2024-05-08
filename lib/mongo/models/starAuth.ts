@@ -5,7 +5,7 @@ const starAuthSchema = new Schema<IStarAuth>(
   {
     starId: { type: String, required: true, unique: true, index: true },
     starName: { type: String, required: true },
-    passcode: { type: Number, required: true },
+    passcode: { type: String, required: true },
   },
   {
     autoCreate: true,

@@ -9,7 +9,7 @@ import { awards, social } from "./types";
 export interface  IStarAuth {
     starId: string;
     starName: string;
-    passcode: number;
+    passcode: string;
 }
 
 /**
