@@ -75,7 +75,7 @@ export default async function handler(
           const starAuth = new MStarAuth({
             starId: newStar._id,
             starName: newStar.starName,
-            passcode: hashPasscode,
+            passcode: genpasscode,
           });
           
           const newStarAuth = await starAuth.save();
