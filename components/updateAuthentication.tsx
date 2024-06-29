@@ -28,7 +28,7 @@ export default function UpdateAuthentication(props: Readonly<Iprops>) {
       const response = await res.json();
 
       if (!response.success) setPasscodeError(true);
-      else props.authCallback(true);
+      else props.authCallback(true, response.data);
     } catch (error) {
         console.log(`Error! ${error}`);
         setPasscodeError(true);
@@ -41,7 +41,6 @@ export default function UpdateAuthentication(props: Readonly<Iprops>) {
         <div id={styles.authContainer}>
           <h1>
             Hello {router.query.starName}! Welcome to the update profile page.
-            {router.query.id}
           </h1>
           <h3 id={styles.error}>
             {passcodeError && "Invalid passcode entered!"}
