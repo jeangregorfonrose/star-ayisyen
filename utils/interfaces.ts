@@ -28,8 +28,8 @@ export interface IStar {
   fname: string;
   lname: string;
   starName: string;
-  otherNames: [string] | [];
-  occupations: [string] | [];
+  otherNames: string[] | [];
+  occupations: string[] | [];
   birthDate: Date;
   birthPlace: {
     country: string;
