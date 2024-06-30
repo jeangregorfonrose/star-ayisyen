@@ -97,6 +97,40 @@ export default async function handler(
         return res.status(500).send(response);
       }
     }
+    case "PUT": {
+      if (!req.body) {
+        response.message = "Missing";
+        return res.status(400).send(response);
+      }
+
+      // get body
+      let data = req.body;
+
+      // check for required fields
+      const missingFields = ["starName"].filter((field) => !data[field]);
+      if (missingFields.length > 0) {
+        return res.status(400).send(`Missing ${missingFields.join(", ")}.`);
+      }
+
+      // Find and existing star and replace with new data
+      try {
+        const updatedStar = await MStar.findByIdAndUpdate(data._id, data);
+
+        console.log(updatedStar);
+
+        // verify by id
+        if (data._id == updatedStar._id) {
+          response.message = `Successfully updated ${updatedStar.starName}`;
+          response.success = true;
+          return res.status(200).send(response);
+        } else {
+          throw new Error("Updated failed");
+        }
+      } catch (error) {
+        response.message = "Server Error";
+        return res.status(500).send(response);
+      }
+    }
     case "DELETE": {
       if (!req.query.id) {
         response.message = "Missing Data";
