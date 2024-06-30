@@ -61,9 +61,23 @@ export default function UpdateProfile(props: Readonly<Iprops>) {
     }
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-    console.log(star);
+
+    try {
+      const res = await fetch("/api/star", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(star),
+      });
+
+      const response = await res.json();
+
+      if(response.success) alert("Profile updated successfully");
+      else alert("Error updating profile");
+    } catch (error) {
+      console.log(`Error! ${error}`);
+    }
   };
 
   return (
