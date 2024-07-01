@@ -6,10 +6,7 @@ export default function Document() {
       <Head>
         <meta charSet="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
           href="https://fonts.googleapis.com/css?family=Montserrat&display=optional"
           rel="stylesheet"
@@ -18,6 +15,11 @@ export default function Document() {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
         ></link>
+        <script
+          src="https://upload-widget.cloudinary.com/latest/global/all.js"
+          type="text/javascript"
+          async
+        ></script>
       </Head>
       <body>
         <Main />
