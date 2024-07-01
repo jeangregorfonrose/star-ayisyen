@@ -33,6 +33,9 @@ export default function UpdateProfile(props: Readonly<Iprops>) {
     setOtherOccupation(value);
   };
 
+  /**
+   * Add other name to otherNames' array
+   */
   const addOtherName = () => {
     if (otherName != "") {
       // copy otherNames array
@@ -47,6 +50,9 @@ export default function UpdateProfile(props: Readonly<Iprops>) {
     }
   };
 
+  /**
+   * Add new occupation on the occupations' array
+   */
   const addOtherOccupation = () => {
     if (otherOccupation != "") {
       // copy occupations array
@@ -61,6 +67,10 @@ export default function UpdateProfile(props: Readonly<Iprops>) {
     }
   };
 
+  /**
+   * Send call to API to update profile
+   * @param event 
+   */
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
