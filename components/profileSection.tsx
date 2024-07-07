@@ -10,7 +10,7 @@ export default function ProfileSection(props: Readonly<Props>) {
 
   return (
     <section id={styles.detailsPage}>
-      <div id={styles.profilePic}></div>
+      <div id={styles.profilePic} style={{backgroundImage: `url('${star.imageUrl}')`}}></div>
       <div id={styles.info}>
         <div id={styles.geneInfo}>
           <div id={styles.name}>
