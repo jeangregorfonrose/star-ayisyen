@@ -44,19 +44,22 @@ export default function SearchInput() {
               const starName = star.starName;
               const occupations = star.occupations;
               const image = star.imageUrl;
+              const profileLink = "star/" + starName + "?id=" + star._id;
 
               return (
                 <li key={star._id}>
-                  <div
-                    className={styles.profilePic}
-                    style={{ backgroundImage: `url('${image}')` }}
-                  ></div>
-                  <div className={styles.resultDesc}>
-                    <p className={styles.resultName}>{starName}</p>
-                    <p className={styles.resultTitle}>
-                      {occupations.toString().replaceAll(",", " - ")}
-                    </p>
-                  </div>
+                  <a href={profileLink}>
+                    <div
+                      className={styles.profilePic}
+                      style={{ backgroundImage: `url('${image}')` }}
+                    ></div>
+                    <div className={styles.resultDesc}>
+                      <p className={styles.resultName}>{starName}</p>
+                      <p className={styles.resultTitle}>
+                        {occupations.toString().replaceAll(",", " - ")}
+                      </p>
+                    </div>
+                  </a>
                 </li>
               );
             })
