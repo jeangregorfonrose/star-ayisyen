@@ -105,8 +105,13 @@ export default function UpdateProfile(props: Readonly<Iprops>) {
           <CldUploadWidget
             uploadPreset="starsayisyen"
             onSuccess={(results) => {
-              console.log(results);
-              setStar((values) => ({ ...values, imageUrl: results?.info?.url }));
+              if(!results.info) return;
+
+              const info = results.info;
+
+              if(typeof info != "string" ) {
+                setStar((values) => ({ ...values, imageUrl: info.url }));
+              }
             }}
           >
             {({ open }) => {
