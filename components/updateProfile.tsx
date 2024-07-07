@@ -1,11 +1,9 @@
 import { IStar } from "@/utils/interfaces";
 import { useState } from "react";
 import styles from "@/styles/updateProfile.module.css";
-import { Edit, Edit2Icon, PlusSquareIcon } from "lucide-react";
+import { Edit,PlusSquareIcon } from "lucide-react";
 import { occupations } from "@/utils/constants";
-import Image from "next/image";
-import UploadWidget from "./cloudinary/cloudinaryUploadWidget";
-import { CldUploadButton, CldUploadWidget } from "next-cloudinary";
+import { CldUploadWidget } from "next-cloudinary";
 
 interface Iprops {
   star: IStar;
