@@ -1,8 +1,11 @@
 import { IStar } from "@/utils/interfaces";
 import { useState } from "react";
 import styles from "@/styles/updateProfile.module.css";
-import { PlusSquareIcon } from "lucide-react";
+import { Edit, Edit2Icon, PlusSquareIcon } from "lucide-react";
 import { occupations } from "@/utils/constants";
+import Image from "next/image";
+import UploadWidget from "./cloudinary/cloudinaryUploadWidget";
+import { CldUploadButton, CldUploadWidget } from "next-cloudinary";
 
 interface Iprops {
   star: IStar;
@@ -98,6 +101,27 @@ export default function UpdateProfile(props: Readonly<Iprops>) {
             Welcome {originalStar.starName}, here you can update your star
             profile
           </h1>
+
+          <div id={styles.profilePic} style={{backgroundImage: `url('${star.imageUrl}')`}}></div>
+
+          <CldUploadWidget
+            uploadPreset="starsayisyen"
+            onSuccess={(results) => {
+              console.log(results);
+              setStar((values) => ({ ...values, imageUrl: results?.info?.url }));
+            }}
+          >
+            {({ open }) => {
+              return (
+                <button id={styles.changePicture} className="button" onClick={() => open()}>
+                  Change Picture
+                  <Edit />
+                </button>
+              );
+            }}
+          </CldUploadWidget>
+
+          {/*  */}
 
           <form id={styles.updateForm} onSubmit={(e) => e.preventDefault()}>
             <label htmlFor="fname" className={styles.inputLabel}>
