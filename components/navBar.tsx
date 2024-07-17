@@ -12,9 +12,14 @@ export default function NavBar() {
     <nav className={styles.nav}>
       <div className="content">
         <div id={styles.navContainer}>
-          <h1>Star Ayisyen</h1>
+          <a href={process.env.HOST}>
+            <h1>Star Ayisyen</h1>
+          </a>
           {currentPath == "/admin/dashboard" && (
-            <button className="button" onClick={() => signOut({ callbackUrl: "/admin" })}>
+            <button
+              className="button"
+              onClick={() => signOut({ callbackUrl: "/admin" })}
+            >
               logout
             </button>
           )}
