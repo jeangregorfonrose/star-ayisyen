@@ -143,6 +143,11 @@ export default async function handler(
       try {
         // Find by ID and delete
         const deletedStar = await MStar.findByIdAndDelete(id);
+        
+        // Remove star auth record
+        if(deletedStar) {
+          await MStarAuth.findOneAndDelete({starId: id});
+        }
         response.success = true;
         response.message = "Record deleted successfully!";
         response.data = deletedStar.toJSON();
