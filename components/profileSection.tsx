@@ -10,7 +10,10 @@ export default function ProfileSection(props: Readonly<Props>) {
 
   return (
     <section id={styles.detailsPage}>
-      <div id={styles.profilePic} style={{backgroundImage: `url('${star.imageUrl}')`}}></div>
+      <div
+        id={styles.profilePic}
+        style={{ backgroundImage: `url('${star.imageUrl}')` }}
+      ></div>
       <div id={styles.info}>
         <div id={styles.geneInfo}>
           <div id={styles.name}>
@@ -39,27 +42,32 @@ export default function ProfileSection(props: Readonly<Props>) {
         </div>
         <div id={styles.persInfo}>
           <p>
-            <span className={styles.infoBold}>First name:</span> {star.fname}
+            <span className={styles.infoBold}>First name:</span>
+            <br></br> {star.fname}
           </p>
           <p>
-            <span className={styles.infoBold}>Last name:</span> {star.lname}
+            <span className={styles.infoBold}>Last name:</span> <br></br>
+            {star.lname}
           </p>
           <p>
-            <span className={styles.infoBold}>Born:</span> {star.birthDate.toString()}
+            <span className={styles.infoBold}>Born:</span>
+            <br></br>
+            {star.birthDate.toString().substring(0, 10)}
           </p>
           <p>
-            <span className={styles.infoBold}>Death:</span> {star.deathDate?.toString()}
+            <span className={styles.infoBold}>Death:</span> <br></br>
+            {star.deathDate?.toString().substring(0, 10)}
           </p>
           <p>
-            <span className={styles.infoBold}>Birth Place:</span> {star.birthPlace.city}
+            <span className={styles.infoBold}>Birth Place:</span>
+            <br></br>
+            {star.birthPlace.city}
           </p>
         </div>
       </div>
       <div id={styles.bio}>
         <h1>Biography</h1>
-        <p>
-          {star.bio}
-        </p>
+        <p>{star.bio}</p>
       </div>
     </section>
   );
