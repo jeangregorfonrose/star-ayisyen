@@ -76,7 +76,7 @@ export default function UpdateProfile(props: Readonly<Iprops>) {
     event.preventDefault();
 
     try {
-      const res = await fetch("/api/star", {
+      const res = await fetch(`${process.env.NEXTAUTH_URL}/api/star`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(star),

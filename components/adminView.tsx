@@ -40,7 +40,7 @@ function AddStarForm(props: Readonly<Iprops>) {
       // Assign starName
       star.starName = name;
 
-      let res = await fetch("/api/star", {
+      let res = await fetch(`${process.env.NEXTAUTH_URL}/api/star`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",

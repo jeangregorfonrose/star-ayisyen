@@ -12,7 +12,7 @@ export default function NavBar() {
     <nav className={styles.nav}>
       <div className="content">
         <div id={styles.navContainer}>
-          <a href={process.env.HOST}>
+          <a href={process.env.NEXTAUTH_URL}>
             <h1>Star Ayisyen</h1>
           </a>
           {currentPath == "/admin/dashboard" && (

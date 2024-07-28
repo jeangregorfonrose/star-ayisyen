@@ -15,7 +15,7 @@ export default function UpdateAuthentication(props: Readonly<Iprops>) {
     if (!passcode || passcode.length < 6) setPasscodeError(true);
 
     try {
-      const res = await fetch("/api/updateauth", {
+      const res = await fetch(`${process.env.NEXTAUTH_URL}/api/updateauth`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
