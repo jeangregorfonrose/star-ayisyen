@@ -1,3 +1,7 @@
+/**
+ * This function helps to generate a passcode for each star profile
+ * @returns The passcode generated
+ */
 export function generatePasscode() {
   // Define the length of the passcode
   const passcodeLength = 6;
