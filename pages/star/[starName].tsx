@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { IStar } from "@/utils/interfaces";
-import Layout from "@/components/layout";
+import Layout from "@/components/layout/layout";
 import ProfileSection from "@/components/profileSection";
 import Head from "next/head";
 
@@ -35,7 +35,11 @@ export default function Star() {
         <title>Star Ayisyen | {router.query.id}</title>
       </Head>
       <Layout>
-        {star ? <ProfileSection star={star}/> : <div>Error getting star info</div> }
+        {star ? (
+          <ProfileSection star={star} />
+        ) : (
+          <div>Error getting star info</div>
+        )}
       </Layout>
     </>
   );

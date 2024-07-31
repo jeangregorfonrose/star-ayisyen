@@ -1,5 +1,5 @@
 import Banner from "@/components/banner";
-import Layout from "@/components/layout";
+import Layout from "@/components/layout/layout";
 import StarList from "@/components/starList";
 import { IStar } from "@/utils/interfaces";
 import Head from "next/head";
