@@ -18,6 +18,8 @@ export default function Home() {
 
       let resJson = await res.json();
 
+      console.log(resJson);
+
       setStars(resJson.data);
     } catch (err) {
       console.log(err);
