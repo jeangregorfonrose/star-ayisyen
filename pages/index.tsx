@@ -14,7 +14,7 @@ export default function Home() {
     try {
       let res = await fetch("/api/stars");
 
-      if (!res.ok) throw new Error("Could not get artists.");
+      if (!res) throw new Error("Could not get artists.");
 
       let resJson = await res.json();
 
