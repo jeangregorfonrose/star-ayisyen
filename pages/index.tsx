@@ -12,7 +12,7 @@ export default function Home() {
   // Get all stars from the database
   const getStars = async () => {
     try {
-      let res = await fetch(`${process.env.NEXTAUTH_URL}/api/stars`);
+      let res = await fetch("/api/stars");
 
       if (!res) throw new Error("Could not get artists.");
 
