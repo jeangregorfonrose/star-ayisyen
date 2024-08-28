@@ -10,7 +10,7 @@ export default function SearchInput() {
     // If search term  is empty, don't fetch
     if (searchTerm === "") return;
 
-    fetch("/api/search/${searchTerm}")
+    fetch(`/api/search/${searchTerm}`)
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
