@@ -107,12 +107,6 @@ export default function AdminView() {
     },
   });
 
-  // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
-  const myImage = cld.image("star-ayisyen/stars/mikaben");
-
-  // Resize to 250 x 250 pixels using the 'fill' crop mode.
-  myImage.resize(fill().width(40).height(40));
-
   // Get all stars from the database
   const getStars = async () => {
     try {
@@ -185,18 +179,33 @@ export default function AdminView() {
             <ul id={styles.listContainer}>
               {stars ? (
                 stars.map((star: IStar) => {
+                  // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
+                  const myImage = cld.image("star-ayisyen/stars/mikaben");
+                  const test = cld.image(star.imageUrl);
+                  console.log(test);
+
+                  console.log(myImage);
+
+                  // Resize to 250 x 250 pixels using the 'fill' crop mode.
+                  myImage.resize(fill().width(40).height(40));
+
                   return (
                     <li key={star._id} className={styles.star}>
                       <div className={styles.info}>
                         <div className={styles.pic}>
                           <AdvancedImage cldImg={myImage} />
+                          {/* <Image width="40" height="40" src={star.imageUrl}/> */}
                         </div>
                         <h3>{star.starName}</h3>
                       </div>
 
                       <div className={styles.actions}>
                         <SquarePen className={styles.icon} color="#55d38b" />
-                        <Trash2 className={styles.icon} color="#d35555" onClick={() => deleteStar(star)}/>
+                        <Trash2
+                          className={styles.icon}
+                          color="#d35555"
+                          onClick={() => deleteStar(star)}
+                        />
                       </div>
                     </li>
                   );

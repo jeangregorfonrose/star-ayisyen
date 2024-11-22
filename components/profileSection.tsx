@@ -10,64 +10,66 @@ export default function ProfileSection(props: Readonly<Props>) {
 
   return (
     <section id={styles.detailsPage}>
-      <div
-        id={styles.profilePic}
-        style={{ backgroundImage: `url('${star.imageUrl}')` }}
-      ></div>
-      <div id={styles.info}>
-        <div id={styles.geneInfo}>
-          <div id={styles.name}>
-            <h1>{star.starName}</h1>
+      <div className="content">
+        <div
+          id={styles.profilePic}
+          style={{ backgroundImage: `url('${star.imageUrl}')` }}
+        ></div>
+        <div id={styles.info}>
+          <div id={styles.geneInfo}>
+            <div id={styles.name}>
+              <h1>{star.starName}</h1>
+            </div>
+            <div id={styles.titles}>
+              <h3>{star.occupations.toString().replaceAll(",", " - ")}</h3>
+            </div>
+            <div id={styles.socials}>
+              <a href="#">
+                <i className="bi bi-twitter"></i>
+              </a>
+              <a href="#">
+                <i className="bi bi-facebook"></i>
+              </a>
+              <a href="#">
+                <i className="bi bi-tiktok"></i>
+              </a>
+              <a href="#">
+                <i className="bi bi-instagram"></i>
+              </a>
+              <a href="#">
+                <i className="bi bi-linkedin"></i>
+              </a>
+            </div>
           </div>
-          <div id={styles.titles}>
-            <h3>{star.occupations.toString().replaceAll(",", " - ")}</h3>
-          </div>
-          <div id={styles.socials}>
-            <a href="#">
-              <i className="bi bi-twitter"></i>
-            </a>
-            <a href="#">
-              <i className="bi bi-facebook"></i>
-            </a>
-            <a href="#">
-              <i className="bi bi-tiktok"></i>
-            </a>
-            <a href="#">
-              <i className="bi bi-instagram"></i>
-            </a>
-            <a href="#">
-              <i className="bi bi-linkedin"></i>
-            </a>
+          <div id={styles.persInfo}>
+            <p>
+              <span className={styles.infoBold}>First name:</span>
+              <br></br> {star.fname}
+            </p>
+            <p>
+              <span className={styles.infoBold}>Last name:</span> <br></br>
+              {star.lname}
+            </p>
+            <p>
+              <span className={styles.infoBold}>Born:</span>
+              <br></br>
+              {star.birthDate.toString().substring(0, 10)}
+            </p>
+            <p>
+              <span className={styles.infoBold}>Death:</span> <br></br>
+              {star.deathDate?.toString().substring(0, 10)}
+            </p>
+            <p>
+              <span className={styles.infoBold}>Birth Place:</span>
+              <br></br>
+              {star.birthPlace.city}
+            </p>
           </div>
         </div>
-        <div id={styles.persInfo}>
-          <p>
-            <span className={styles.infoBold}>First name:</span>
-            <br></br> {star.fname}
-          </p>
-          <p>
-            <span className={styles.infoBold}>Last name:</span> <br></br>
-            {star.lname}
-          </p>
-          <p>
-            <span className={styles.infoBold}>Born:</span>
-            <br></br>
-            {star.birthDate.toString().substring(0, 10)}
-          </p>
-          <p>
-            <span className={styles.infoBold}>Death:</span> <br></br>
-            {star.deathDate?.toString().substring(0, 10)}
-          </p>
-          <p>
-            <span className={styles.infoBold}>Birth Place:</span>
-            <br></br>
-            {star.birthPlace.city}
-          </p>
+        <div id={styles.bio}>
+          <h1>Biography</h1>
+          <p>{star.bio}</p>
         </div>
-      </div>
-      <div id={styles.bio}>
-        <h1>Biography</h1>
-        <p>{star.bio}</p>
       </div>
     </section>
   );

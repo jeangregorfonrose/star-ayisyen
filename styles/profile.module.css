@@ -3,6 +3,9 @@
     height: 100%;
     background-color: white;
     padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #profilePic{
